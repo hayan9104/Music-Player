@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VibePlayer - Music Player with Visualizer</title>
+    <link rel="stylesheet" href="Pr1.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-music"></i>
+                <h1>VibePlayer</h1>
+            </div>
+            <div class="theme-toggle">
+                <button id="themeBtn">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Left Sidebar - Playlist -->
+            <aside class="sidebar">
+                <div class="playlist-header">
+                    <h2><i class="fas fa-list-music"></i> Playlist</h2>
+                    <button class="shuffle-btn" id="shuffleBtn">
+                        <i class="fas fa-random"></i>
+                    </button>
+                </div>
+                <div class="playlist" id="playlist">
+                    <!-- Playlist items will be populated by JavaScript -->
+                </div>
+            </aside>
+
+            <!-- Center - Player -->
+            <section class="player-section">
+                <!-- Visualizer -->
+                <div class="visualizer-container">
+                    <canvas id="visualizer"></canvas>
+                    <div class="visualizer-overlay">
+                        <div class="album-art-container">
+                            <div class="album-art" id="albumArt">
+                                <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop&crop=center" alt="Album Art">
+                                <div class="play-overlay" id="playOverlay">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Song Info -->
+                <div class="song-info">
+                    <h2 class="song-title" id="songTitle">Calm Relaxing Music</h2>
+                    <p class="song-artist" id="songArtist">Nature Sounds</p>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="progress-container">
+                    <span class="time current-time" id="currentTime">0:00</span>
+                    <div class="progress-bar" id="progressBar">
+                        <div class="progress-fill" id="progressFill"></div>
+                        <div class="progress-thumb" id="progressThumb"></div>
+                    </div>
+                    <span class="time total-time" id="totalTime">0:00</span>
+                </div>
+
+                <!-- Controls -->
+                <div class="controls">
+                    <button class="control-btn" id="prevBtn">
+                        <i class="fas fa-step-backward"></i>
+                    </button>
+                    <button class="control-btn play-btn" id="playBtn">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button class="control-btn" id="nextBtn">
+                        <i class="fas fa-step-forward"></i>
+                    </button>
+                    
+                </div>
+
+                <!-- Volume Control -->
+                <div class="volume-container">
+                    <i class="fas fa-volume-up volume-icon"></i>
+                    <div class="volume-bar">
+                        <div class="volume-fill" id="volumeFill"></div>
+                        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="70">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Sidebar - Equalizer -->
+            <aside class="equalizer-panel">
+                <h3><i class="fas fa-sliders-h"></i> Equalizer</h3>
+                <div class="equalizer">
+                    <div class="eq-band">
+                        <label>60Hz</label>
+                        <input type="range" class="eq-slider" data-freq="60" min="-20" max="20" value="0" orient="vertical">
+                        <span class="eq-value">0</span>
+                    </div>
+                    <div class="eq-band">
+                        <label>170Hz</label>
+                        <input type="range" class="eq-slider" data-freq="170" min="-20" max="20" value="0" orient="vertical">
+                        <span class="eq-value">0</span>
+                    </div>
+                    <div class="eq-band">
+                        <label>310Hz</label>
+                        <input type="range" class="eq-slider" data-freq="310" min="-20" max="20" value="0" orient="vertical">
+                        <span class="eq-value">0</span>
+                    </div>
+                    <div class="eq-band">
+                        <label>600Hz</label>
+                        <input type="range" class="eq-slider" data-freq="600" min="-20" max="20" value="0" orient="vertical">
+                        <span class="eq-value">0</span>
+                    </div>
+                    <div class="eq-band">
+                        <label>1kHz</label>
+                        <input type="range" class="eq-slider" data-freq="1000" min="-20" max="20" value="0" orient="vertical">
+                        <span class="eq-value">0</span>
+                    </div>
+                    <div class="eq-band">
+                        <label>3kHz</label>
+                        <input type="range" class="eq-slider" data-freq="3000" min="-20" max="20" value="0" orient="vertical">
+                        <span class="eq-value">0</span>
+                    </div>
+                    <div class="eq-band">
+                        <label>6kHz</label>
+                        <input type="range" class="eq-slider" data-freq="6000" min="-20" max="20" value="0" orient="vertical">
+                        <span class="eq-value">0</span>
+                    </div>
+                    <div class="eq-band">
+                        <label>12kHz</label>
+                        <input type="range" class="eq-slider" data-freq="12000" min="-20" max="20" value="0" orient="vertical">
+                        <span class="eq-value">0</span>
+                    </div>
+                </div>
+                <div class="eq-presets">
+                    <button class="preset-btn active" data-preset="flat">Flat</button>
+                    <button class="preset-btn" data-preset="rock">Rock</button>
+                    <button class="preset-btn" data-preset="pop">Pop</button>
+                    <button class="preset-btn" data-preset="jazz">Jazz</button>
+                </div>
+            </aside>
+        </main>
+
+        <!-- Audio Element -->
+        <audio id="audio" preload="metadata" crossorigin="anonymous"></audio>
+
+        <!-- File Input for Adding Songs -->
+        <input type="file" id="fileInput" accept="audio/*" multiple style="display: none;">
+        <button class="add-music-btn" id="addMusicBtn">
+            <i class="fas fa-plus"></i>
+            <span>Add Music</span>
+        </button>
+    </div>
+
+    <script src="Pr1.js"></script>
+</body>
+</html>
